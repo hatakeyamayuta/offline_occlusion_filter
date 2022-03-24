@@ -1,0 +1,23 @@
+<launch>
+    <arg name="param_file" default="$(find-pkg-share offline_occlusion_filter)/config/car_param.yaml" />  
+    <arg name="pcd_file_name" default="car_model.pcd"/>
+    <arg name="rosbag_file_name" default="/"/>
+    <arg name="input_topic_name" default="/localization/util/measurement_range/pointcloud"/>
+   	<arg name="output_topic_name" default="/localization/util/occlusion/pointcloud"/>
+    <arg name="base_frame" default="base_link"/>
+    <arg name="sensor_frame" default="pandar_40p_right"/>
+    <arg name="voxel_size" default="3.0"/>
+    <arg name="sampling_point" default="1500"/>
+    <node pkg='offline_occlusion_filter' exec='offline_object_occlusion_filter' output='screen'>
+        <param from="$(var param_file)" />
+        <param name="pcd_file_name" value="$(var pcd_file_name)"/>
+        <param name="rosbag_file_name" value="$(var rosbag_file_name)"/>
+        <param name="input_topic_name" value="$(var input_topic_name)"/>
+        <param name="output_topic_name" value="$(var output_topic_name)"/>
+        <param name="base_frame" value="$(var base_frame)"/>
+        <param name="sensor_frame" value="$(var sensor_frame)"/>
+        <param name="voxel_size" value="$(var voxel_size)"/>
+        <param name="sampling_point" value="$(var sampling_point)"/>
+    </node>
+</launch>
+
